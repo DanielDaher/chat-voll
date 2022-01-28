@@ -1,4 +1,5 @@
 const usersModel = require('../models/usersModel');
+const { makeSingature } = require('../auth/makeTokenSignature');
 const { validatePassword, validateUserName } = require('./helpers');
 
 const create = async ({ userName, password }) => {
@@ -10,7 +11,12 @@ const create = async ({ userName, password }) => {
 
   const insert = await usersModel.create({ userName, password });
 
-  return { responseMessage: insert, statusCode: 201 };
+  if (insert === 'user created successfully') {
+    const signature = await makeSingature({userName, password});
+  
+    return { responseMessage: { signature }, statusCode: 200 };
+  }
+  return { responseMessage: insert, statusCode: 400 };
 };
 
 module.exports = {
