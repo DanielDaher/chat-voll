@@ -18,13 +18,13 @@ const secret = process.env.TOKEN_SECRET;
 const makeSingature = async ({ userName, password }) => {
   try {
   if (isInvalidInputFields(userName, password)) { 
-    return { errorMessage: 'All fields must be filled' }; 
+    return { responseMessage: 'All fields must be filled', status: 400 }; 
   }
 
   const user = await usersModel.getByName(userName);
 
   if (isInvalidLogin(user, password)) {
-    return { errorMessage: 'Incorrect username or password' };
+    return { responseMessage: 'Incorrect username or password', status: 400 };
   }
 
   const jwtConfig = {
@@ -34,9 +34,10 @@ const makeSingature = async ({ userName, password }) => {
 
     const token = jwt.sign({ data: user }, secret, jwtConfig);
 
-  return { token };
+  return { responseMessage: { token }, status: 200 };
   } catch (err) {
-    return { errorMessage: 'Erro interno ao gerar token', error: err.message };
+    console.error(err)
+    return { responseMessage: 'Erro interno ao gerar token', status: 400 };
   }
 };
 

@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3001;
 
 const usersRoute = require('./Routes/usersRoute');
 const messagesRoute = require('./Routes/messagesRoute');
+const loginRoute = require('./Routes/loginRoute');
 
 app.use(express.json({
   type: ['application/json', 'text/plain']
@@ -16,6 +17,8 @@ app.use(cors());
 app.use('/users', usersRoute);
 
 app.use('/messages', messagesRoute);
+
+app.use('/login', loginRoute);
 
 app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(PORT, () => console.log(`Ouvindo a porta ${PORT}`));
