@@ -4,7 +4,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 
 const usersRoute = require('./Routes/usersRoute');
-/* const messagesRoute = require('./Routes/messagesRoute'); */
+const messagesRoute = require('./Routes/messagesRoute');
 
 app.use(express.json({
   type: ['application/json', 'text/plain']
@@ -12,7 +12,7 @@ app.use(express.json({
 
 app.use('/users', usersRoute);
 
-/* app.use('/messages', messagesRoute); */
+app.use('/messages', messagesRoute);
 
 app.get('/', (req, res) => res.send('Hello World!'));
 app.listen(PORT, () => console.log(`Ouvindo a porta ${PORT}`));
