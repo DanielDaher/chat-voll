@@ -5,15 +5,15 @@ require('dotenv').config();
 
 const secret = process.env.TOKEN_SECRET;
 
-   const isInvalidInputFields = (userName, password) => {
-    if (!userName || !password) return true;
-    return false;
-  };
-  
-  const isInvalidLogin = (user, password) => {
-    if (!user || user.password !== password) return true;
-    return false;
-  };
+const isInvalidInputFields = (userName, password) => {
+if (!userName || !password) return true;
+return false;
+};
+
+const isInvalidLogin = (user, password) => {
+if (!user || user.password !== password) return true;
+return false;
+};
 
 const makeSingature = async ({ userName, password }) => {
   try {
