@@ -5,7 +5,7 @@ export default function Login() {
     <nav className='login'>
       <h1>Chat Voll</h1>
       <p>Acesse sua conta para entrar no chat!</p>
-      <Form />
+      <Form submitType='login'/>
     </nav>
   );
 }
