@@ -5,7 +5,7 @@ export default function Register() {
     <main className='register'>
       <h1>Crie sua conta agora mesmo</h1>
       <p>Preencha suas informações</p>
-      <Form />
+      <Form submitType='register'/>
     </main>
   );
 }
