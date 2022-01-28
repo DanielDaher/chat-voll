@@ -14,7 +14,7 @@ const create = async ({ userName, password }) => {
   if (insert === 'user created successfully') {
     const signature = await makeSingature({userName, password});
   
-    return { responseMessage: { signature }, statusCode: 200 };
+    return { responseMessage: signature, statusCode: 200 };
   }
   return { responseMessage: insert, statusCode: 400 };
 };
