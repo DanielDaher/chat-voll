@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Router from 'next/router';
 import { createUser, makeLogin } from "../helpers/api";
 import Loading from "./Loading";
+import PropTypes from "prop-types";
 
 export default function Form({ submitType }) {
   const [userName, setUserName] = useState('');
@@ -16,10 +17,6 @@ export default function Form({ submitType }) {
       Router.push('/webchat');
     }
   }, [token]);
-
-  useEffect(() => {
-    console.log('Página buildada');
-  }, []);
 
   const submitUserInfo = async (e) => {
     e.preventDefault();
@@ -59,3 +56,7 @@ export default function Form({ submitType }) {
     </form>
   );
 }
+
+Form.propTypes = {
+  submitType: PropTypes.string.isRequired,
+};
