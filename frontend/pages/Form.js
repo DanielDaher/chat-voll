@@ -1,8 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Router from 'next/router';
+import { createUser, makeLogin } from "../helpers/api";
+import Loading from "./Loading";
 
-export default function Form() {
+export default function Form({ submitType }) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    if (token && token.length > 1) {
+      sessionStorage.setItem("vollChatToken", token);
+      Router.push('/webchat');
+    }
+  }, [token]);
+
+  useEffect(() => {
+    console.log('Página buildada');
+  }, []);
+
+  const submitUserInfo = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (submitType === 'register') {
+      const { registerInfo } = await createUser({ userName, password });      
+      registerInfo.token ? setToken(registerInfo.token) : setShowError(registerInfo.error);
+    }
+
+    if (submitType === 'login') {
+      const { loginResponse } = await makeLogin({ userName, password });
+      loginResponse.token ? setToken(loginResponse.token) : setShowError(loginResponse.error);
+    }
+    setLoading(false);
+  };
 
   return (
     <form>
@@ -16,7 +48,14 @@ export default function Form() {
         placeholder="Insira sua senha"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button>Entrar</button>
+      {loading && <Loading />}
+      {showError && <p>{showError}</p>}
+      <button
+        type="submit"
+        onClick={(e) => submitUserInfo(e)}
+      >
+        Entrar
+      </button>
     </form>
   );
 }

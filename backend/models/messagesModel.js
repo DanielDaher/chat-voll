@@ -7,8 +7,8 @@ const create = async ({ userID, messageText, timeStamp }) => {
     timeStamp,
   };
   const db = await connection();
-  await db.collection('messages').insertOne(query);
-  return 'user created successfully';
+  const insertMessageOnDatabase = await db.collection('messages').insertOne(query);
+  return 'message inserted on database';
 };
 
 const getLastThirtyMessages = async () => {
@@ -17,9 +17,9 @@ const getLastThirtyMessages = async () => {
     $natural: -1
   };
   const db = await connection();
-  const user = await db.collection('messages').find({ query, $orderby: orderby }).limit(30);
+  const lastMessages = await db.collection('messages').find({ query, $orderby: orderby }).limit(30);
   // https://stackoverflow.com/questions/4421207/how-to-get-the-last-n-records-in-mongodb
-  return user;
+  return lastMessages;
 };
 
 module.exports = {

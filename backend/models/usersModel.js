@@ -1,13 +1,18 @@
 const connection = require('./connection');
 
 const create = async ({ userName, password }) => {
-  const query = {
-    userName,
-    password,
-  };
-  const db = await connection();
-  await db.collection('users').insertOne(query);
-  return 'user created successfully';
+  try {
+    const query = {
+      userName,
+      password,
+    };
+    const db = await connection();
+    await db.collection('users').insertOne(query);
+    return 'user created successfully';  
+  } catch (error) {
+    console.error(error);
+    return 'error on database query';
+  }
 };
 
 const getByName = async (userName) => {
