@@ -18,13 +18,13 @@ return false;
 const makeSingature = async ({ userName, password }) => {
   try {
   if (isInvalidInputFields(userName, password)) { 
-    return { responseMessage: 'All fields must be filled', status: 400 }; 
+    return { responseMessage: { error: 'All fields must be filled' }, status: 400 }; 
   }
 
   const user = await usersModel.getByName(userName);
 
   if (isInvalidLogin(user, password)) {
-    return { responseMessage: 'Incorrect username or password', status: 400 };
+    return { responseMessage: { error: 'Incorrect username or password' }, status: 400 };
   }
 
   const jwtConfig = {
@@ -37,7 +37,7 @@ const makeSingature = async ({ userName, password }) => {
   return { responseMessage: { token }, status: 200 };
   } catch (err) {
     console.error(err)
-    return { responseMessage: 'Erro interno ao gerar token', status: 400 };
+    return { responseMessage: { error: 'Erro interno ao gerar token' }, status: 400 };
   }
 };
 

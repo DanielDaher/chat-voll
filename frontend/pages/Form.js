@@ -8,6 +8,7 @@ export default function Form({ submitType }) {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState('');
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     if (token && token.length > 1) {
@@ -16,19 +17,21 @@ export default function Form({ submitType }) {
     }
   }, [token]);
 
+  useEffect(() => {
+    console.log('Página buildada');
+  }, []);
+
   const submitUserInfo = async (e) => {
     e.preventDefault();
     setLoading(true);
     if (submitType === 'register') {
-      const { registerInfo } = await createUser({ userName, password });
-      console.log(registerInfo);
-      if (registerInfo) setToken(registerInfo.token);
+      const { registerInfo } = await createUser({ userName, password });      
+      registerInfo.token ? setToken(registerInfo.token) : setShowError(registerInfo.error);
     }
 
     if (submitType === 'login') {
       const { loginResponse } = await makeLogin({ userName, password });
-      console.log(loginResponse);
-      if (loginResponse) setToken(loginResponse.token);
+      loginResponse.token ? setToken(loginResponse.token) : setShowError(loginResponse.error);
     }
     setLoading(false);
   };
@@ -46,6 +49,7 @@ export default function Form({ submitType }) {
         onChange={(e) => setPassword(e.target.value)}
       />
       {loading && <Loading />}
+      {showError && <p>{showError}</p>}
       <button
         type="submit"
         onClick={(e) => submitUserInfo(e)}
