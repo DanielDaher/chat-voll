@@ -21,15 +21,18 @@ export default function Form({ submitType }) {
   const submitUserInfo = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (submitType === 'register') {
-      const { registerInfo } = await createUser({ userName, password });      
-      registerInfo.token ? setToken(registerInfo.token) : setShowError(registerInfo.error);
-    }
+    let APIResponse;
 
+    if (submitType === 'register') {
+      const { registerInfo } = await createUser({ userName, password });
+      APIResponse = registerInfo;
+    }
     if (submitType === 'login') {
       const { loginResponse } = await makeLogin({ userName, password });
-      loginResponse.token ? setToken(loginResponse.token) : setShowError(loginResponse.error);
+      APIResponse = loginResponse;
     }
+
+    APIResponse.token ? setToken(APIResponse.token) : setShowError(APIResponse.error);
     setLoading(false);
   };
 
