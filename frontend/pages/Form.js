@@ -14,6 +14,7 @@ export default function Form({ submitType }) {
   useEffect(() => {
     if (token && token.length > 1) {
       sessionStorage.setItem("vollChatToken", token);
+      sessionStorage.setItem("vollChatUserName", userName);
       Router.push('/webchat');
     }
   }, [token]);
