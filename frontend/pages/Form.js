@@ -22,13 +22,13 @@ export default function Form({ submitType }) {
     if (submitType === 'register') {
       const { registerInfo } = await createUser({ userName, password });
       console.log(registerInfo);
-      setToken(registerInfo.token);
+      if (registerInfo) setToken(registerInfo.token);
     }
 
     if (submitType === 'login') {
       const { loginResponse } = await makeLogin({ userName, password });
       console.log(loginResponse);
-      setToken(loginResponse.token);
+      if (loginResponse) setToken(loginResponse.token);
     }
     setLoading(false);
   };
