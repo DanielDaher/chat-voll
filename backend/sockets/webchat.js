@@ -3,16 +3,14 @@ const { createMessage } = require("./services");
 module.exports = (io) => io.on('connection', (socket) => {
   const { id } = socket;
 
-  socket.on('userNickname', ({ nickname, action }) => emitNicknames({ io, id, nickname, action }));
-
   socket.on('message', async ({ message, token }) => await createMessage({ message, token, socket, io }));
 
-  socket.on('disconnect', () => {
+  /* socket.on('disconnect', () => {
     const filteredNicknames = nicknames.filter((user) => user.id !== id);
 
     nicknames = filteredNicknames;
     returnNicknames({ io, nicknames });
-  });
+  }); */
 
-  socket.on('generateNickname', () => socket.emit('generateNickname', id));
+  /* socket.on('generateNickname', () => socket.emit('generateNickname', id)); */
 });

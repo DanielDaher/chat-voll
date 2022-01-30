@@ -46,3 +46,24 @@ export const makeLogin = async ({ userName, password }) => {
     return { loginResponse: { error: 'Falha ao se conectar ao banco de dados. Tente novamente mais tarde.' } }
   }
 };
+
+export const getMessagesFromDatabase = async (token) => {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/messages` /* || 'http://localhost:3001/users/' */;
+    console.log('url ', url);
+    
+      const APIResponse = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Authorization': token,
+          'Content-Type': 'application/json'
+        },
+      });
+      const { messages } = await APIResponse.json();
+      console.log(messages);
+      return messages;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+};
