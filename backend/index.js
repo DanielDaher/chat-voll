@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 
 const io = require('socket.io')(http, {
   cors: {
-    origin: `http://localhost:3000`, // url aceita pelo cors - USAR DOTENV AQUI FUTURAMENTE
+    origin: process.env.FRONTEND_URL, // url aceita pelo cors
     methods: ['GET', 'POST'], // Métodos aceitos pela url
   },
 });
