@@ -3,8 +3,8 @@ const messagesService = require('../services/messagesService');
 const create = async (req, res) => {
   try {
     const { _id: userID } = req.user;
-    const { messageText } = req.body;
-    const { statusCode, responseMessage } = await messagesService.create({ userID, messageText });
+    const { message } = req.body;
+    const { statusCode, responseMessage } = await messagesService.create({ userID, message });
   
     return { statusCode, responseMessage };
   } catch (error) {

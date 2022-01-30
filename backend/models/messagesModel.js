@@ -1,10 +1,10 @@
 const connection = require('./connection');
 
-const create = async ({ userID, messageText, timeStamp }) => {
+const create = async ({ userID, message, timeStamp }) => {
   try {
     const query = {
       userID,
-      messageText,
+      message,
       timeStamp,
     };
     const db = await connection();

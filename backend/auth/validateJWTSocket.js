@@ -14,7 +14,7 @@ module.exports = async (token) => {
 
     if (!user) return { errorMessage: 'jwt malformed' };
 
-    return { user };
+    return user;
   } catch (error) {
     console.error(error);
     return { errorMessage: err.message };

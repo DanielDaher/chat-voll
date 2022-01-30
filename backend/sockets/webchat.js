@@ -1,12 +1,11 @@
+const { createMessage } = require("./services");
+
 module.exports = (io) => io.on('connection', (socket) => {
   const { id } = socket;
 
   socket.on('userNickname', ({ nickname, action }) => emitNicknames({ io, id, nickname, action }));
 
-  socket.on('message', async ({ chatMessage: message, nickname }) => {
-    await messagesController.createMessage({ message, nickname, timestamp });
-    io.emit('message', `${timestamp} - ${nickname}: ${message}`);
-  });
+  socket.on('message', async ({ message, token }) => await createMessage({ message, token, socket, io }));
 
   socket.on('disconnect', () => {
     const filteredNicknames = nicknames.filter((user) => user.id !== id);
