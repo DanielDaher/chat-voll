@@ -1,8 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const http = require('http').createServer(app);
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
+
+const io = require('socket.io')(http, {
+  cors: {
+    origin: `http://localhost:${PORT}`, // url aceita pelo cors
+    methods: ['GET', 'POST'], // Métodos aceitos pela url
+  },
+});
+
+require('./sockets/webchat')(io);
 
 const usersRoute = require('./Routes/usersRoute');
 const messagesRoute = require('./Routes/messagesRoute');
@@ -21,4 +31,4 @@ app.use('/messages', messagesRoute);
 app.use('/login', loginRoute);
 
 app.get('/', (req, res) => res.send('Hello World!'));
-app.listen(PORT, () => console.log(`Ouvindo a porta ${PORT}`));
+http.listen(PORT, () => console.log(`Ouvindo a porta ${PORT}`));

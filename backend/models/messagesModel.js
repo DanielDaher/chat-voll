@@ -1,14 +1,19 @@
 const connection = require('./connection');
 
 const create = async ({ userID, messageText, timeStamp }) => {
-  const query = {
-    userID,
-    messageText,
-    timeStamp,
-  };
-  const db = await connection();
-  const insertMessageOnDatabase = await db.collection('messages').insertOne(query);
-  return 'message inserted on database';
+  try {
+    const query = {
+      userID,
+      messageText,
+      timeStamp,
+    };
+    const db = await connection();
+    const insertMessageOnDatabase = await db.collection('messages').insertOne(query);
+    return 'message inserted on database';  
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 };
 
 const getLastThirtyMessages = async () => {

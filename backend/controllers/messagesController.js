@@ -4,12 +4,13 @@ const create = async (req, res) => {
   try {
     const { _id: userID } = req.user;
     const { messageText } = req.body;
-    const insert = await messagesService.create({ userID, messageText });
+    const { statusCode, responseMessage } = await messagesService.create({ userID, messageText });
   
-    res.status(insert.statusCode).json(insert.responseMessage);
+    return { statusCode, responseMessage };
   } catch (error) {
     console.error(error);
-    res.status(400).json('error, try again latter');
+    console.error(error)
+    return  { statusCode: 400, responseMessage: error };
   }
 };
 
