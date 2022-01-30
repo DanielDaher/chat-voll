@@ -1,5 +1,8 @@
+const moment = require('moment');
 const validateJWTSocket = require("../auth/validateJWTSocket");
 const messagesController = require("../controllers/messagesController");
+
+const timeStamp = moment().format('hh:mm:ss');
 
 const createMessage = async ({ message, token, socket, io }) => {
   const userIsValid = await validateJWTSocket(token);
@@ -7,7 +10,7 @@ const createMessage = async ({ message, token, socket, io }) => {
 
   const { _id, userName } = userIsValid;
 
-  const requisition = { userID: _id, body: message };
+  const requisition = { user: { _id }, body: { message, timeStamp } };
   const insertMessageOnDatabase = await messagesController.create(requisition);
 
   if (insertMessageOnDatabase.responseMessage === 'message inserted on database') {

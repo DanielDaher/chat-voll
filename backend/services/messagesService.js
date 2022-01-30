@@ -1,9 +1,7 @@
 const messagesModel = require('../models/messagesModel');
 
-const create = async ({ userID, message }) => {
+const create = async ({ userID, message, timeStamp }) => {
   try {
-    const timeStamp = Date.now();
-
     const insert = await messagesModel.create({ userID, message, timeStamp });
 
     return { responseMessage: insert, statusCode: 201 };
