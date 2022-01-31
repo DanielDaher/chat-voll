@@ -11,7 +11,7 @@ export default function OnlineUsers() {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
     socketRef.current.emit('online-users', { userName, token });
     return () => {
-      socketRef.current.disconnect(userName);
+      socketRef.current.disconnect();
     }
   }, []);
 
@@ -22,7 +22,7 @@ export default function OnlineUsers() {
       setUsers(socketMessageResponse);
     });
     return () => {
-      socketRef.current.disconnect(userName);
+      socketRef.current.disconnect();
     }
   }, [users]);
 
