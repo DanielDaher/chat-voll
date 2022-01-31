@@ -48,6 +48,7 @@
 .webchat-screen input {
   height: 80px;
   background-color: #5e17eb;
+  border: none;
   border-radius: 35px;
   color: white;
   font-size: 20px;
@@ -70,8 +71,9 @@
 
 .webchat-screen button {
   background-color: rgb(123, 211, 123);
-  color: white;
+  border: none;
   border-radius: 50%;
+  color: white;
   height: 80px;
   width: 80px;
 }
