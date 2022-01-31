@@ -31,6 +31,12 @@
   margin-left: 20px;
 }
 
+.webchat-message p {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+}
+
 .webchat-screen form {
   align-items: center;
   display: flex;

@@ -58,7 +58,7 @@ export default function Webchat() {
         <section>
           <h3>{message}</h3>
         </section>
-        <p>{userName} {timeStamp.slice(0, 5)}</p>
+        <p><span>{userName}</span> {timeStamp.slice(0, 5)}</p>
       </div>
     );
   };
