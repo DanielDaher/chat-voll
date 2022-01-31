@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
 import Router from 'next/router';
 import { getMessagesFromDatabase } from "../helpers/api";
+import OnlineUsers from "./OnlineUsers";
 
 export default function Webchat() {
   const [userMessage, setUserMessage] = useState('');
@@ -20,7 +21,7 @@ export default function Webchat() {
     });
     return () => {
       socketRef.current.disconnect();
-      buttonRef.current.scrollIntoView({ behavior: 'smooth' });
+      buttonRef.current.scrollIntoView();
     }
   }, [messages]);
 
@@ -56,6 +57,7 @@ export default function Webchat() {
   return (
     <div>
       <h1>WEBCHAT</h1>
+      <OnlineUsers />
       <main>
         {messages.map(({ message, userName }, index) => (
           <RenderMessage key={index} message={message} userName={userName} />
