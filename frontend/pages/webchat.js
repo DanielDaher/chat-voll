@@ -3,13 +3,14 @@ import { io } from 'socket.io-client';
 import Router from 'next/router';
 import { getMessagesFromDatabase } from "../helpers/api";
 import OnlineUsers from "./OnlineUsers";
+import { IoMdSend } from "react-icons/io";
 
 export default function Webchat() {
   const [userMessage, setUserMessage] = useState('');
   const [messages, setMessages] = useState([]);
 
   const socketRef = useRef();
-  const buttonRef = useRef();
+  const chatBottomRef = useRef();
 
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
@@ -21,7 +22,7 @@ export default function Webchat() {
     });
     return () => {
       socketRef.current.disconnect();
-      buttonRef.current.scrollIntoView();
+      chatBottomRef.current.scrollIntoView();
     }
   }, [messages]);
 
@@ -45,32 +46,43 @@ export default function Webchat() {
     setUserMessage('');
   };
 
-  const RenderMessage = ({ message, userName }) => {
+  const RenderMessage = ({ message, userName, timeStamp }) => {
+    let positionOfElement = 'flex-start';
+    if (userName === sessionStorage.getItem('vollChatUserName')) positionOfElement = 'flex-end'
     return (
-      <div key={userName}>
-        <h3>{message}</h3>
-        <p>{userName}</p>
+      <div
+        key={userName}
+        className='webchat-message'
+        style={{ alignItems: positionOfElement }}
+      >
+        <section>
+          <h3>{message}</h3>
+        </section>
+        <p>{userName} {timeStamp.slice(0, 5)}</p>
       </div>
     );
   };
 
   return (
-    <div>
-      <h1>WEBCHAT</h1>
+    <div className='webchat-screen'>
       <OnlineUsers />
-      <main>
-        {messages.map(({ message, userName }, index) => (
-          <RenderMessage key={index} message={message} userName={userName} />
-        ))}
+      <div>
+        <main>
+          {messages.map(({ message, userName, timeStamp }, index) => (
+            <RenderMessage key={index} message={message} userName={userName} timeStamp={timeStamp} />
+          ))}
+          <div ref={chatBottomRef}></div>
+        </main>
         <form>
           <input
             type='text'
             value={userMessage}
+            placeholder="Mensagem..."
             onChange={(e) => setUserMessage(e.target.value)}
           />
-          <button ref={buttonRef} type='submit' onClick={(e) => sendMessage(e)} >Enter</button>
+          <button type='submit' onClick={(e) => sendMessage(e)} ><IoMdSend /></button>
         </form>
-      </main>
+      </div>
     </div>
   );
 }

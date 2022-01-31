@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { io } from 'socket.io-client';
+import { RiRadioButtonLine } from 'react-icons/ri';
 
 export default function OnlineUsers() {
   const [users, setUsers] = useState([]);
@@ -27,9 +28,15 @@ export default function OnlineUsers() {
   }, [users]);
 
   return (
-    <div>
+    <div className='online-users'>
       <h1>Online Users</h1>
-      {users.map((user, index) => <p key={index}>{user.userName}</p>)}
+      {users.map((user, index) => (
+        <div>
+          <RiRadioButtonLine  className='radio-button-online'/>
+          <li key={index}>{user.userName}</li>
+        </div>
+        ))
+      }
     </div>
   );
 };
