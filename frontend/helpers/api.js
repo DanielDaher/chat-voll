@@ -1,8 +1,16 @@
+const validateFields = ({ userName, password }) => {
+  if (userName.length < 2 || password.length < 2) return false;
+  return true;
+};
+
 export const createUser = async ({ userName, password }) => {
+  const userError = 'Usuário inválido ou senha insegura';
   try {
+    if (!validateFields({ userName, password })) return { registerInfo: { error: userError } };
+
     const url = `${process.env.NEXT_PUBLIC_API_URL}/users` /* || 'http://localhost:3001/users/' */;
     console.log('url ', url);
-    
+
       const registerUser = await fetch(url, {
         method: "POST",
         headers: {
@@ -19,12 +27,15 @@ export const createUser = async ({ userName, password }) => {
       return { registerInfo };
   } catch (error) {
     console.error(error);
-    return { registerInfo: { error: 'Falha ao se conectar ao banco de dados' } }
+    return { registerInfo: { error: 'Falha ao se conectar ao banco de dados. Tente novamente mais tarde.' } }
   }
 };
 
 export const makeLogin = async ({ userName, password }) => {
+  const userError = 'Usuário ou senha incorretos';
   try {
+    if (!validateFields({ userName, password })) return { loginResponse: { error: userError } };
+
     const url = `${process.env.NEXT_PUBLIC_API_URL}/login` /* || 'http://localhost:3001/users/' */;
     console.log('url ', url);
     
@@ -40,6 +51,7 @@ export const makeLogin = async ({ userName, password }) => {
         }),
       });
       const loginResponse = await APIResponse.json();
+      console.log('loginResponse ', loginResponse);
       return { loginResponse };
   } catch (error) {
     console.error(error);

@@ -17,7 +17,6 @@ export default function OnlineUsers() {
   }, []);
 
   useEffect(() => {
-    const userName = sessionStorage.getItem('vollChatUserName');
     socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
     socketRef.current.on('online-users', (socketMessageResponse) => {
       setUsers(socketMessageResponse);
@@ -31,9 +30,9 @@ export default function OnlineUsers() {
     <div className='online-users'>
       <h1>Online Users</h1>
       {users.map((user, index) => (
-        <div>
+        <div key={index}>
           <RiRadioButtonLine  className='radio-button-online'/>
-          <li key={index}>{user.userName}</li>
+          <li>{user.userName}</li>
         </div>
         ))
       }

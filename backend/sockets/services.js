@@ -25,6 +25,17 @@ const showOnlineUsers = async ({ userName, token, socket, id }) => {
   }
 };
 
+const showWhoIsTyping = async ({ userName, token, socket }) => {
+  try {
+    const userIsValid = await validateJWTSocket(token);
+    if (userIsValid.errorMessage) return socket.emit('invalidToken', userIsValid.errorMessage);
+
+    socket.broadcast.emit('userTyping', { userName });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const createMessage = async ({ message, token, socket, io }) => {
   try {
     const userIsValid = await validateJWTSocket(token);
@@ -50,4 +61,5 @@ module.exports = {
   createMessage,
   showOnlineUsers,
   removeOfflineUser,
+  showWhoIsTyping,
 };

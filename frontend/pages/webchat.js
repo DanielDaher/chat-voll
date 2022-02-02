@@ -7,10 +7,32 @@ import { IoMdSend } from "react-icons/io";
 
 export default function Webchat() {
   const [userMessage, setUserMessage] = useState('');
+  const [userTyping, setUserTyping] = useState('');
   const [messages, setMessages] = useState([]);
 
   const socketRef = useRef();
   const chatBottomRef = useRef();
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('vollChatToken');
+    const userName = sessionStorage.getItem('vollChatUserName');
+    if (userMessage.length > 0) {
+      socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
+      socketRef.current.emit('userTyping', { token, userName });
+    }
+
+    if (userMessage.length === 0) {
+      socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
+      socketRef.current.emit('userTyping', { token, userName: '' });
+    }
+    
+    socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
+    socketRef.current.on('userTyping', (socketMessageResponse) => {
+      if (socketMessageResponse.userName !== userName) {
+        setUserTyping(socketMessageResponse.userName);
+      }
+    })
+  }, [userMessage]);
 
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
@@ -58,7 +80,10 @@ export default function Webchat() {
         <section>
           <h3>{message}</h3>
         </section>
-        <p><span>{userName}</span> {timeStamp.slice(0, 5)}</p>
+        <p>
+          <span>{userName}</span> 
+          {timeStamp.slice(0, 5)}
+        </p>
       </div>
     );
   };
@@ -74,6 +99,7 @@ export default function Webchat() {
           <div ref={chatBottomRef}></div>
         </main>
         <form>
+          { userTyping !== '' ? <p>{userTyping} está digitando</p> : null }
           <input
             type='text'
             value={userMessage}
