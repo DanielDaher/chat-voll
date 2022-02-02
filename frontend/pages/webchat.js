@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { getMessagesFromDatabase } from "../helpers/api";
 import OnlineUsers from "./OnlineUsers";
 import { IoMdSend } from "react-icons/io";
+import UserTyping from "./UserTyping";
 
 export default function Webchat() {
   const [userMessage, setUserMessage] = useState('');
@@ -12,27 +13,6 @@ export default function Webchat() {
 
   const socketRef = useRef();
   const chatBottomRef = useRef();
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('vollChatToken');
-    const userName = sessionStorage.getItem('vollChatUserName');
-    if (userMessage.length > 0) {
-      socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
-      socketRef.current.emit('userTyping', { token, userName });
-    }
-
-    if (userMessage.length === 0) {
-      socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
-      socketRef.current.emit('userTyping', { token, userName: '' });
-    }
-    
-    socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
-    socketRef.current.on('userTyping', (socketMessageResponse) => {
-      if (socketMessageResponse.userName !== userName) {
-        setUserTyping(socketMessageResponse.userName);
-      }
-    })
-  }, [userMessage]);
 
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
@@ -63,6 +43,7 @@ export default function Webchat() {
 
   const sendMessage = (e) => {
     e.preventDefault();
+    if (userMessage === '') return;
     const token = sessionStorage.getItem(('vollChatToken'));
     socketRef.current.emit('message', { message: userMessage, token });
     setUserMessage('');
@@ -99,7 +80,7 @@ export default function Webchat() {
           <div ref={chatBottomRef}></div>
         </main>
         <form>
-          { userTyping !== '' ? <p>{userTyping} está digitando</p> : null }
+        <UserTyping userMessage={userMessage} />
           <input
             type='text'
             value={userMessage}
