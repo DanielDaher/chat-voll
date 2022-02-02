@@ -1,13 +1,27 @@
 const messagesModel = require('../models/messagesModel');
 
-const create = async ({ userID, messageText }) => {
-  const timeStamp = Date.now();
+const create = async ({ userID, userName, message, timeStamp }) => {
+  try {
+    const insert = await messagesModel.create({ userID, userName, message, timeStamp });
 
-  const insert = await messagesModel.create({ userID, messageText, timeStamp });
+    return { responseMessage: insert, statusCode: 201 };
+  } catch (error) {
+    console.error(error);
+    return { responseMessage: error, statusCode: 400 };
+  }
+};
 
-  return { responseMessage: insert, statusCode: 201 };
+const getLastThirtyMessages = async () => {
+  try {
+    const messages = await messagesModel.getLastThirtyMessages();
+    return messages;
+  } catch (error) {
+    console.error(error);
+    return { error };
+  }
 };
 
 module.exports = {
   create,
+  getLastThirtyMessages,
 };

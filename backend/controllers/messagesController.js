@@ -2,17 +2,29 @@ const messagesService = require('../services/messagesService');
 
 const create = async (req, res) => {
   try {
-    const { _id: userID } = req.user;
-    const { messageText } = req.body;
-    const insert = await messagesService.create({ userID, messageText });
+    const { _id: userID, userName } = req.user;
+    const { message, timeStamp } = req.body;
+    const { statusCode, responseMessage } = await messagesService.create({ userID, userName, message, timeStamp });
   
-    res.status(insert.statusCode).json(insert.responseMessage);
+    return { statusCode, responseMessage };
   } catch (error) {
     console.error(error);
-    res.status(400).json('error, try again latter');
+    console.error(error)
+    return  { statusCode: 400, responseMessage: error };
+  }
+};
+
+const getLastThirtyMessages = async (req, res) => {
+  try {
+    const messages = await messagesService.getLastThirtyMessages();
+    return res.status(200).json({ messages });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ error });
   }
 };
 
 module.exports = {
   create,
+  getLastThirtyMessages,
 };

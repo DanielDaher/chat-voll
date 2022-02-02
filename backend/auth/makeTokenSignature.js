@@ -24,7 +24,7 @@ const makeSingature = async ({ userName, password }) => {
   const user = await usersModel.getByName(userName);
 
   if (isInvalidLogin(user, password)) {
-    return { responseMessage: { error: 'Incorrect username or password' }, status: 400 };
+    return { responseMessage: { error: 'Incorrect username or password' }, status: 401 };
   }
 
   const jwtConfig = {
