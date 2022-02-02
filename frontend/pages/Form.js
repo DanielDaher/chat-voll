@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { createUser, makeLogin } from "../helpers/api";
 import Loading from "./Loading";
 import PropTypes from "prop-types";
+import { redirectTo } from "../helpers/redirect";
 
 export default function Form({ submitType }) {
   const [userName, setUserName] = useState('');
@@ -15,7 +16,7 @@ export default function Form({ submitType }) {
     if (token && token.length > 1) {
       sessionStorage.setItem("vollChatToken", token);
       sessionStorage.setItem("vollChatUserName", userName);
-      Router.push('/webchat');
+      redirectTo('/webchat');
     }
   }, [token]);
 
@@ -50,9 +51,10 @@ export default function Form({ submitType }) {
         onChange={(e) => setPassword(e.target.value)}
       />
       {loading && <Loading />}
-      {showError && <p>{showError}</p>}
+      {showError && <p data-testid='show-error-message'>{showError}</p>}
       <button
         type="submit"
+        data-testid='submit-button'
         onClick={(e) => submitUserInfo(e)}
       >
         Entrar
