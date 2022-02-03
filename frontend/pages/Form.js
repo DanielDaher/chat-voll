@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Router from 'next/router';
 import { createUser, makeLogin } from "../helpers/api";
 import Loading from "./Loading";
 import PropTypes from "prop-types";
@@ -20,6 +19,11 @@ export default function Form({ submitType }) {
     }
   }, [token]);
 
+  useEffect(() => {
+    setLoading(false);
+    setShowError(false);
+  }, [userName, password]);
+
   const submitUserInfo = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,7 +43,7 @@ export default function Form({ submitType }) {
   };
 
   return (
-    <form>
+    <form className='homepage-form'>
       <input
         type='text'
         placeholder="Insira seu nome de usuário"
@@ -50,8 +54,6 @@ export default function Form({ submitType }) {
         placeholder="Insira sua senha"
         onChange={(e) => setPassword(e.target.value)}
       />
-      {loading && <Loading />}
-      {showError && <p data-testid='show-error-message'>{showError}</p>}
       <button
         type="submit"
         data-testid='submit-button'
@@ -59,6 +61,8 @@ export default function Form({ submitType }) {
       >
         Entrar
       </button>
+      {showError && <p data-testid='show-error-message'>{showError}</p>}
+      {loading && <Loading />}
     </form>
   );
 }

@@ -7,10 +7,13 @@
 }
 
 .register h1 {
+  font-size: 55px;
+  margin-top: 200px;
   text-decoration: underline;
   text-decoration-color: gray;
 }
 
 .register p {
   color: #5e17eb;
+  font-size: 30px;
 }
