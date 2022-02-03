@@ -22,11 +22,7 @@ app.use(express.json({
   type: ['application/json', 'text/plain']
 })); //https://stackoverflow.com/questions/54016068/empty-body-in-fetch-post-request
 
-app.use(cors(x => x
-  .AllowAnyMethod()
-  .AllowAnyHeader()
-  .SetIsOriginAllowed(origin => true) // allow any origin
-  .AllowCredentials())); // allow credentials));
+app.use(cors());
 
 app.use('/users', usersRoute);
 
