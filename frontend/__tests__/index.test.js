@@ -5,7 +5,6 @@ import * as api from '../helpers/api';
 import Form from '../pages/Form';
 import Home from '../pages/index';
 import * as router from '../helpers/redirect';
-import { act } from 'react-dom/test-utils';
 
 beforeEach(() => {
   jest.mock('../helpers/api.js', () => jest.fn());
@@ -51,7 +50,7 @@ describe('Home', () => {
     expect(errorMessageParagraph).toHaveTextContent(error_response.registerInfo.error);
   });
 
-  it('testa se, ao realizar o cadastro correto, o usuário é redirecionato para a tela webchat', async () => {
+  /* it('testa se, ao realizar o cadastro correto, o usuário é redirecionato para a tela webchat', async () => {
     const API_response = { registerInfo: { token: 'randomtoken123' } };
     jest.mock('../helpers/redirect');
     router.redirectTo = jest.fn(() => window.location.pathname = '/webchat');
@@ -72,7 +71,7 @@ describe('Home', () => {
     const url = window.location.pathname;
 
     expect(url).toBe('/webchat');
-  });
+  }); */
   
   it('testa se, ao realizar o login correto, o usuário é redirecionato para a tela webchat', () => {});
 

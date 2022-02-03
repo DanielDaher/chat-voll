@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
-import Router from 'next/router';
 import { getMessagesFromDatabase } from "../helpers/api";
 import OnlineUsers from "./OnlineUsers";
 import { IoMdSend } from "react-icons/io";
 import UserTyping from "./UserTyping";
+import { redirectTo } from "../helpers/redirect";
+import { goToChatBottom } from "../helpers/chatBottom";
 
 export default function Webchat() {
   const [userMessage, setUserMessage] = useState('');
@@ -17,21 +18,20 @@ export default function Webchat() {
   useEffect(() => {
     socketRef.current = io(process.env.NEXT_PUBLIC_API_URL);
     socketRef.current.on('message', (socketMessageResponse) => {
-      setMessages([
-        ...messages,
-        socketMessageResponse
-      ]);
+      setMessages([ ...messages, socketMessageResponse ]);
     });
+
     return () => {
       socketRef.current.disconnect();
-      chatBottomRef.current.scrollIntoView();
+      goToChatBottom(chatBottomRef);
+      /* chatBottomRef.current.scrollIntoView(); */
     }
   }, [messages]);
 
   useEffect(() => {
     const token = sessionStorage.getItem('vollChatToken');
     if (!token) {
-      Router.push('/');
+      redirectTo('/');
     }
     const getMessages = async () => {
       const allMessages = await getMessagesFromDatabase(token);
