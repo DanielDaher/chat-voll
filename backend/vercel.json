@@ -6,15 +6,10 @@
       "use": "@vercel/node"
     }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/:path*",
-    "has": [
-      {
-        "type": "query",
-        "key": "authorized"
-      }
-    ],
+      "src": "/(.*)",
+      "dest": "/",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
