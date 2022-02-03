@@ -22,7 +22,12 @@ app.use(express.json({
   type: ['application/json', 'text/plain']
 })); //https://stackoverflow.com/questions/54016068/empty-body-in-fetch-post-request
 
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 
 app.use('/users', usersRoute);
 
