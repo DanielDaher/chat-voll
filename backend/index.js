@@ -22,7 +22,6 @@ app.use(express.json({
   type: ['application/json', 'text/plain']
 })); //https://stackoverflow.com/questions/54016068/empty-body-in-fetch-post-request
 
-app.options('*', cors()) // include before other routes
 app.use(cors());
 
 app.use('/users', usersRoute);
