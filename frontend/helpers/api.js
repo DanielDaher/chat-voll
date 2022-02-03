@@ -1,5 +1,5 @@
 const validateFields = ({ userName, password }) => {
-  if (userName.length < 2 || password.length < 2) return false;
+  if (userName.length < 2 || password.length < 4) return false;
   return true;
 };
 

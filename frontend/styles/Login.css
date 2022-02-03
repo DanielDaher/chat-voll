@@ -9,6 +9,11 @@
   min-width: 30vw;
 }
 
+.login h1 {
+  margin-top: 200px;
+  font-size: 50px;
+}
+
 .login p {
-  font-size: larger;
+  font-size: 30px;
 }
