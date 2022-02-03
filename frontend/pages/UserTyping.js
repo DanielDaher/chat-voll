@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { BiMessageSquareDots } from "react-icons/bi";
 import { io } from 'socket.io-client';
 
 export default function UserTyping({ userMessage }) {
@@ -29,10 +30,21 @@ export default function UserTyping({ userMessage }) {
   }, [userMessage]);
 
   const paragraphStyle = {
-    width: '150px',
+    width: 'auto',
   };
 
+  const WhoIsTyping = () => (
+    <div className='userTyping'>
+      <p
+        style={paragraphStyle}
+      >
+        {userTyping} está digitando 
+      </p>
+      <BiMessageSquareDots style={{ width: '25px', height: '25px', marginLeft: '8px' }} />
+    </div>
+  );
+
   return (
-    userTyping !== '' ? <p style={paragraphStyle}>{userTyping} está digitando</p> : null
+    userTyping !== '' ? <WhoIsTyping /> : null
   );
 };
