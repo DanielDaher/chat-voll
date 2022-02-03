@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 
 const io = require('socket.io')(http, {
   cors: {
-    origin: process.env.FRONTEND_URL, // url aceita pelo cors
+    origin: [process.env.FRONTEND_URL, `${process.env.FRONTEND_URL}/webchat`], // url aceita pelo cors
     methods: ['GET', 'POST'], // Métodos aceitos pela url
   },
 });
