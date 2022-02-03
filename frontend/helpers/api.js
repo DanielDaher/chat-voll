@@ -27,7 +27,7 @@ export const createUser = async ({ userName, password }) => {
       return { registerInfo };
   } catch (error) {
     console.error(error);
-    return { registerInfo: { error: 'Falha ao se conectar ao banco de dados. Tente novamente mais tarde.' } }
+    return { registerInfo: { error: 'Falha ao se conectar ao banco de dados.' } }
   }
 };
 
@@ -55,7 +55,7 @@ export const makeLogin = async ({ userName, password }) => {
       return { loginResponse };
   } catch (error) {
     console.error(error);
-    return { loginResponse: { error: 'Falha ao se conectar ao banco de dados. Tente novamente mais tarde.' } }
+    return { loginResponse: { error: 'Falha ao se conectar ao banco de dados.' } }
   }
 };
 

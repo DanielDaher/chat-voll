@@ -1,13 +1,14 @@
 .homepage-form {
+  align-items: center;
   display: flex;
   flex-direction: column;
 }
 
 .homepage-form input {
-  background-color: #d9d9d9;
+  background-color: #e9e9e9;
   border: none;
   border-radius: 15px;
-  color: #5e17eb;
+  color: #420FA9;
   font-size: 20px;
   height: 80px;
   margin-top: 50px;
@@ -16,11 +17,16 @@
 }
 
 .homepage-form input::placeholder {
-  color: #5e17eb86;
+  color: #420fa96c;
+}
+
+.homepage-form p {
+  font-size: 20px;
+  text-align: center;
 }
 
 
-.homepage-form button {
+/* .homepage-form button {
   background-color: #7bd37b;
   border-color: #7bd37b;
   border-width: 10px;
@@ -35,9 +41,39 @@
 .homepage-form button:active {
   color: white;
   font-size: 15px;
-}
+} */
 
-.homepage-form p {
-  font-size: 20px;
-  text-align: center;
-}
+.homepage-form button {
+  background-color: #82D173;
+  /* padding: 14px 40px; */
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px dashed #82D173;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: .4s;
+  height: 40px;
+  margin-top: 30px;
+  width: 20vw;
+ }
+ 
+ .homepage-form button span:last-child {
+  display: none;
+ }
+ 
+ .homepage-form button:hover {
+  transition: .4s;
+  border: 2px dashed #82D173;
+  background-color: #fff;
+  color: #82D173;
+ }
+
+ 
+ .homepage-form button:active {
+   background-color: #82D173;
+ }

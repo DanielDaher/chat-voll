@@ -8,12 +8,12 @@
   overflow: scroll;
   overflow-x: hidden;
   font-size: 18px;
-  height: 91vh;
+  height: 85vh;
   width: 80vw;
 }
 
 .webchat-message {
-  color: #5e17eb;
+  color: #420FA9;
   display: flex;
   margin-right: 30px;
   flex-direction: column;
@@ -37,23 +37,29 @@
   width: 400px;
 }
 
+.form-typing {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 10px;
+}
+
 .webchat-screen form {
-  align-items: center;
+  align-items: flex-end;
   display: flex;
   justify-content: space-evenly;
-  position: absolute;
   width: 75vw;
 }
 
 .webchat-screen input {
   height: 80px;
-  background-color: #5e17eb;
+  background-color: #420FA9;
   border: none;
   border-radius: 35px;
   color: white;
   font-size: 20px;
   text-align: center;
-  width: 65vw;
+  width: 60vw;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -70,7 +76,7 @@
 }
 
 .webchat-screen button {
-  background-color: rgb(123, 211, 123);
+  background-color: #82D173;
   border: none;
   border-radius: 50%;
   color: white;
@@ -86,7 +92,7 @@
 }
 
 .online-users {
-  background-color: #5e17eb;
+  background-color: #420FA9;
   color: white;
   margin-right: 50px;
   height: 100vh;
@@ -98,7 +104,7 @@
 }
 
 .online-users h1 {
-  font-size: 50px;
+  font-size: 40px;
   margin-top: 70px;
 }
 
@@ -113,5 +119,39 @@
 }
 
 .radio-button-online {
-  color: rgb(9, 238, 9);
+  color: #09ee09;
+}
+
+.userTyping {
+  align-items: center;
+  display: flex;
+  margin-left: 15px;
+}
+
+@media (max-width: 1500px) {
+  .online-users {
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  .online-users * {
+    margin-left: 10px;
+  }
+
+  .webchat-screen main {
+    width: 75vw;
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 870px) {
+  .webchat-screen main {
+    width: 65vw;
+  }
+}
+
+@media (max-height: 900px) {
+  .webchat-screen main {
+    height: 83vh;
+  }
 }

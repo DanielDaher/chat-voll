@@ -79,16 +79,18 @@ export default function Webchat() {
           ))}
           <div ref={chatBottomRef}></div>
         </main>
-        <form>
-        <UserTyping userMessage={userMessage} />
-          <input
-            type='text'
-            value={userMessage}
-            placeholder="Mensagem..."
-            onChange={(e) => setUserMessage(e.target.value)}
-          />
-          <button type='submit' onClick={(e) => sendMessage(e)} ><IoMdSend /></button>
-        </form>
+        <div className='form-typing'>
+          <UserTyping userMessage={userMessage} />
+          <form>
+            <input
+              type='text'
+              value={userMessage}
+              placeholder="Mensagem..."
+              onChange={(e) => setUserMessage(e.target.value)}
+            />
+            <button type='submit' onClick={(e) => sendMessage(e)} ><IoMdSend /></button>
+          </form>
+        </div>
       </div>
     </div>
   );

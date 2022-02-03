@@ -1,5 +1,5 @@
 .login {
-  background-color: #5e17eb;
+  background-color: #420FA9;
   color: white;
   display: flex;
   flex-direction: column;
@@ -12,8 +12,10 @@
 .login h1 {
   margin-top: 200px;
   font-size: 50px;
+  /* color: #04052E; */
 }
 
 .login p {
   font-size: 30px;
+  text-align: center;
 }
