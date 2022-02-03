@@ -8,6 +8,13 @@
   ],
   "headers": [
     {
+      "source": "/:path*",
+    "has": [
+      {
+        "type": "query",
+        "key": "authorized"
+      }
+    ],
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
