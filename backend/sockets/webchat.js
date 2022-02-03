@@ -7,7 +7,7 @@ module.exports = (io) => io.on('connection', (socket) => {
 
   socket.on('online-users', async ({ userName, token }) => await showOnlineUsers({ userName, token, socket, id }));
 
-  socket.on('userTyping', async ({ userName, token }) => await showWhoIsTyping({ userName, token, socket }));
+  socket.on('userTyping', async ({ userName, token }) => await showWhoIsTyping({ userName, token, io }));
 
   socket.on('disconnect', (userName) => removeOfflineUser(id, io));
 });

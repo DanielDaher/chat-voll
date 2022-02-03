@@ -4,8 +4,10 @@ import userEvent from '@testing-library/user-event';
 import * as api from '../helpers/api';
 import Form from '../pages/Form';
 import Home from '../pages/index';
-import * as router from '../helpers/redirect';
-import { act } from 'react-dom/test-utils';
+/* import * as router from '../helpers/redirect';
+import * as help from '../helpers/chatBottom';
+import { mockedMessages } from '../helpers/testMock'; */
+
 
 beforeEach(() => {
   jest.mock('../helpers/api.js', () => jest.fn());
@@ -51,12 +53,36 @@ describe('Home', () => {
     expect(errorMessageParagraph).toHaveTextContent(error_response.registerInfo.error);
   });
 
-  it('testa se, ao realizar o cadastro correto, o usuário é redirecionato para a tela webchat', async () => {
+  it('testa se, ao realizar o login INCORRETO, aparece uma mensagem de erro na tela', async () => {
+    const error_response = { loginResponse: { error: 'Usuário ou senha incorretos' } };
+    api.makeLogin = jest.fn(() => error_response);
+    render(<Form submitType='login' />);
+
+    const userNameInputs = screen.getByPlaceholderText('Insira seu nome de usuário');
+    const passwordInputs = screen.getByPlaceholderText('Insira sua senha');
+    const submitButton = screen.getByTestId('submit-button');
+    
+    userEvent.type(userNameInputs, 'john');
+    userEvent.type(passwordInputs, 'ab');
+    userEvent.click(submitButton);
+
+    const errorMessage = await screen.findByText(error_response.loginResponse.error);
+    const errorMessageParagraph = await screen.findByTestId('show-error-message');
+
+    expect(api.makeLogin).toHaveBeenCalledTimes(1);
+    expect(errorMessage).toBeInTheDocument();
+    expect(errorMessageParagraph).toHaveTextContent(error_response.loginResponse.error);
+  });
+
+  /* it('testa se, ao realizar o cadastro correto, o usuário é redirecionato para a tela webchat', async () => {
     const API_response = { registerInfo: { token: 'randomtoken123' } };
     jest.mock('../helpers/redirect');
     router.redirectTo = jest.fn(() => window.location.pathname = '/webchat');
     api.makeLogin = jest.fn(() => API_response);
     api.createUser = jest.fn(() => API_response);
+    jest.mock('../helpers/chatBottom', () => jest.fn());
+    help.goToChatBottom = jest.fn(() => null);
+    api.getMessagesFromDatabase = jest.fn(() => mockedMessages);
     render(<Form submitType='register' />);
 
     const userNameInputs = screen.getByPlaceholderText('Insira seu nome de usuário');
@@ -72,10 +98,5 @@ describe('Home', () => {
     const url = window.location.pathname;
 
     expect(url).toBe('/webchat');
-  });
-  
-  it('testa se, ao realizar o login correto, o usuário é redirecionato para a tela webchat', () => {});
-
-  it('testa se, ao realizar o login INCORRETO, aparece uma mensagem de erro na tela', () => {});
-
+  }); */
 })

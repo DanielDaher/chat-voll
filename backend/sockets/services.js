@@ -25,12 +25,12 @@ const showOnlineUsers = async ({ userName, token, socket, id }) => {
   }
 };
 
-const showWhoIsTyping = async ({ userName, token, socket }) => {
+const showWhoIsTyping = async ({ userName, token, io }) => {
   try {
     const userIsValid = await validateJWTSocket(token);
     if (userIsValid.errorMessage) return socket.emit('invalidToken', userIsValid.errorMessage);
 
-    socket.broadcast.emit('userTyping', { userName });
+    io.emit('userTyping', { userName });
   } catch (error) {
     console.error(error);
   }
