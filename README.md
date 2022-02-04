@@ -36,14 +36,25 @@ Agora sim estamos prontos para instalar o projeto.
 
 3. Vá para a pasta do Backend, rodando `cd backend` no terminal, e execute `npm install` para instalar as dependências necessárias.
 
-4. Com o comando `npm run dev`, o backend da aplicação já estará funcionando. Aguarde alguns segundos, que o terminal mostrará a mensagem "Ouvindo a porta 3001", o que significa que está tudo certo. Lembrando que, para executar este passo é necessário que seu **MongoDB** esteja ativo.
+4. Crie, dentro da pasta `backend`, um arquivo com o nome `.env` e coloque as seguintes variáveis (uma por linha):
+  `MONGO_URL=mongodb://127.0.0.1:27017`
+  `PORT=3001`
+  `TOKEN_SECRET=segredodotoken`
+  `FRONTEND_URL=http://localhost:3000`
+ Salve as modificações!
 
-5. Abra outro terminal (para não interromper o backend, que deve continuar rodando) e acesse a pasta do projeto novamente.
+5. Com o comando `npm run dev`, o backend da aplicação já estará funcionando. Aguarde alguns segundos, que o terminal mostrará a mensagem "Ouvindo a porta 3001", o que significa que está tudo certo. Lembrando que, para executar este passo é necessário que seu **MongoDB** esteja ativo.
 
-6. Agora, ao invés de entrar na pasta do backend, vamos para o frontend com o comando `cd frontend` no terminal.
+6. Abra outro terminal (para não interromper o backend, que deve continuar rodando) e acesse a pasta do projeto novamente.
 
-7. Instale mais dependências com `npm install`
+7. Agora, ao invés de entrar na pasta do backend, vamos para o frontend com o comando `cd frontend` no terminal.
 
-8. Ao término da etapa anterior, rode no terminal `npm run dev`. Isto pode demorar alguns segundos, aguarde até que o terminal te informe `event: compiled client and server successfully`. Então você pode abrir seu navegador e digitar a url http://localhost:3000. Ou então, basta clicar na url que o terminal apresenta na opção `ready`.
+8. Instale mais dependências com `npm install`
 
-9. E agora é só desfrutar do site!
+9. Crie, dentro da pasta `frontend`, um arquivo com o nome `.env` e coloque as seguintes variáveis (uma por linha):
+  `NEXT_PUBLIC_API_URL=http://localhost:3001`
+ Salve as modificações!
+
+10. Ao término da etapa anterior, rode no terminal `npm run dev`. Isto pode demorar alguns segundos, aguarde até que o terminal te informe `event: compiled client and server successfully`. Então você pode abrir seu navegador e digitar a url http://localhost:3000. Ou então, basta clicar na url que o terminal apresenta na opção `ready`.
+
+11. E agora é só desfrutar do site!
