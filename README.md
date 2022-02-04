@@ -5,8 +5,8 @@ Boas vindas ao Chat Voll, o site onde pode se registrar e conversar com outras p
 
 O objetivo do projeto é facilitar a comunicação através de um sistema de chat para conversas em grupo.
 
-## Para acessar o link da aplicação e ver seu funcionamento:
-[chat-voll](https://chat-voll-danieldaher.vercel.app/)
+## Para acessar o link da aplicação e ver seu funcionamento, clique no link abaixo:
+[CHAT-VOLL](https://chat-voll-danieldaher.vercel.app/)
 
 Observação: o backend da aplicação está hospedado na heroku, então pode ser que o primeiro login/cadastro de usuário demore alguns instantes. Basta aguardar.
 
