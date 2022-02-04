@@ -77,3 +77,16 @@
  .homepage-form button:active {
    background-color: #82D173;
  }
+
+@media (max-width: 1310px) {
+  .homepage-form input {
+    width: auto;
+  }
+}
+
+@media (max-width: 710px) {
+  .login input {
+    width: 200px;
+    font-size: 15px;
+  }
+}

@@ -12,10 +12,11 @@
 .login h1 {
   margin-top: 200px;
   font-size: 50px;
-  /* color: #04052E; */
+  text-align: center;
 }
 
 .login p {
+  margin: 5px 10px 0px 10px;
   font-size: 30px;
   text-align: center;
 }

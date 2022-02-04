@@ -23,7 +23,8 @@
   background-color: #d9d9d9;
   border-radius: 10px;
   min-height: 70px;
-  width: 400px;
+  min-width: 400px;
+  max-width: 80%;
 }
 
 .webchat-message h3 {
