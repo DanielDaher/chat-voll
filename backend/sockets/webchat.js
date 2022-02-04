@@ -3,7 +3,7 @@ const { createMessage, showOnlineUsers, removeOfflineUser, showWhoIsTyping } = r
 module.exports = (io) => io.on('connection', (socket) => {
   const { id } = socket;
 
-  socket.on('message', async ({ message, token }) => await createMessage({ message, token, socket, io }));
+  socket.on('message', async ({ message, token, timeStamp }) => await createMessage({ message, token, timeStamp, socket, io }));
 
   socket.on('online-users', async ({ userName, token }) => await showOnlineUsers({ userName, token, socket, id }));
 

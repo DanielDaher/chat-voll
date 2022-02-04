@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from 'socket.io-client';
+import moment from 'moment';
 import { getMessagesFromDatabase } from "../helpers/api";
 import OnlineUsers from "./OnlineUsers";
 import { IoMdSend } from "react-icons/io";
@@ -9,7 +10,6 @@ import { goToChatBottom } from "../helpers/chatBottom";
 
 export default function Webchat() {
   const [userMessage, setUserMessage] = useState('');
-  const [userTyping, setUserTyping] = useState('');
   const [messages, setMessages] = useState([]);
 
   const socketRef = useRef();
@@ -44,8 +44,9 @@ export default function Webchat() {
   const sendMessage = (e) => {
     e.preventDefault();
     if (userMessage === '') return;
+    const timeStamp = moment().format('hh:mm:ss');
     const token = sessionStorage.getItem(('vollChatToken'));
-    socketRef.current.emit('message', { message: userMessage, token });
+    socketRef.current.emit('message', { message: userMessage, token, timeStamp });
     setUserMessage('');
   };
 
