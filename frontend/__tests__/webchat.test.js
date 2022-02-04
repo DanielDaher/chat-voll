@@ -14,7 +14,7 @@ beforeEach(() => {
   api.getMessagesFromDatabase = jest.fn(() => mockedMessages);
 });
 
-describe('webchat', () => {
+describe.skip('webchat', () => {
   it('testa se a página webchat renderiza as mensagens que já estão no banco de dados', async () => {
     render(<Webchat/>);
     
