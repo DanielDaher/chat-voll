@@ -18,13 +18,13 @@ return false;
 const makeSingature = async ({ userName, password }) => {
   try {
   if (isInvalidInputFields(userName, password)) { 
-    return { responseMessage: { error: 'All fields must be filled' }, status: 400 }; 
+    return { responseMessage: { error: 'Preencha todos os campos' }, status: 400 }; 
   }
 
   const user = await usersModel.getByName(userName);
 
   if (isInvalidLogin(user, password)) {
-    return { responseMessage: { error: 'Incorrect username or password' }, status: 401 };
+    return { responseMessage: { error: 'Usuário ou senha incorretos' }, status: 401 };
   }
 
   const jwtConfig = {
