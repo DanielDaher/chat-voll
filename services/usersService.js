@@ -6,8 +6,8 @@ const create = async ({ userName, password }) => {
   const validPassword = validatePassword(password);
   const userNameExists = await validateUserName(userName);
 
-  if (!validPassword) return { statusCode: 400, responseMessage: { error: 'Invalid or insecure password' } };
-  if (userNameExists) return { statusCode: 400, responseMessage: { error: 'This user is not available' } };
+  if (!validPassword) return { statusCode: 400, responseMessage: { error: 'Senha insegura ou inválida' } };
+  if (userNameExists) return { statusCode: 400, responseMessage: { error: 'Este usuário não está disponível' } };
 
   const insert = await usersModel.create({ userName, password });
 
