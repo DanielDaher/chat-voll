@@ -5,13 +5,6 @@ Boas vindas ao Chat Voll, o site onde pode se registrar e conversar com outras p
 
 O objetivo do projeto é facilitar a comunicação através de um sistema de chat para conversas em grupo.
 
-## Para acessar o link da aplicação e ver seu funcionamento, clique no link abaixo:
-[CHAT-VOLL](https://chat-voll-danieldaher.vercel.app/)
-
-Observação: o backend da aplicação está hospedado na heroku, então pode ser que o primeiro login/cadastro de usuário demore alguns instantes. Basta aguardar.
-
-Se preferir, pode instalar o projeto em sua máquina e rodá-lo localmente seguindo os passos abaixo:
-
 ## Como rodar a aplicação no computador:
 
 #### Seu computador precisa de Git (para versionamento do código), Node.js & npm (para executar a aplicação) e MongoDB (que será nosso banco de dados). Clique nos links, caso ainda não tenha instalado algum desses:
