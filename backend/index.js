@@ -18,11 +18,11 @@ const usersRoute = require('./Routes/usersRoute');
 const messagesRoute = require('./Routes/messagesRoute');
 const loginRoute = require('./Routes/loginRoute');
 
+app.use(cors());
+
 app.use(express.json({
   type: ['application/json', 'text/plain']
 })); //https://stackoverflow.com/questions/54016068/empty-body-in-fetch-post-request
-
-app.use(cors());
 
 app.use('/users', usersRoute);
 
