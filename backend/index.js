@@ -31,4 +31,5 @@ app.use('/messages', messagesRoute);
 app.use('/login', loginRoute);
 
 app.get('/', (req, res) => res.send('Hello World!'));
+
 http.listen(PORT, () => console.log(`Ouvindo a porta ${PORT}`));
